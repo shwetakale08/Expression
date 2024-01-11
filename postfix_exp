@@ -1,0 +1,99 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<ctype.h>
+#define MAX 20
+struct stack
+{
+	int a[MAX];
+	int top;
+}s,s1;
+void init()
+{
+	s1.top=-1;
+}
+int isfull()
+{
+	if(s1.top==MAX-1)
+	return 1;
+	else
+	return 0;
+}
+int isempty()
+{
+	if(s1.top==-1)
+	return 1;
+	else
+	return 0;
+}
+void push(int num)
+{
+	if(isfull())
+	{
+		printf("stack is full dont push:");
+	}
+	else
+	{
+		s1.top++;
+		s1.a[s1.top]=num;
+		
+	}
+}
+int pop()
+{
+	int val;
+	if(isempty())
+	{
+		printf("stsck is empty dont pop:");
+	}
+	else
+	{
+	val=s1.a[s1.top];
+	s1.top--;
+	return val;	
+	}	
+}
+int main()
+{
+	char s[100];
+	int i,A,B,C,D,result,val1,val2;
+	printf("Enter postfix expression:");
+	scanf("%s",&s);
+	printf("ENter value of A,B,C,D:");
+	scanf("%d%d%d%d",&A,&B,&C,&D);
+	init();
+	for(i=0;s[i]!='\0';i++)
+	{
+		if(isalpha(s[i]))
+		{
+		switch(s[i])
+		{
+			case 'A':push(A);
+			         break;
+			case 'B':push(B);
+			         break;
+			case 'C':push(C);
+			         break;
+			case 'D':push(D);
+			         break;		 		          
+		}
+	}
+	else
+	{
+		val1=pop();
+		val2=pop();
+		switch(s[i])
+		{
+			case '+':result=val2+val1;
+			         break;
+			case '-':result=val2-val1;
+			         break;
+			case '*':result=val2*val1;
+			         break;
+			case '/':result=val2/val1;
+			         break;		 		          
+		}
+		push(result);
+	}
+	}
+		printf("\nresult=%d",pop());
+}
